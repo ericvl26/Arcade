@@ -14,6 +14,11 @@ body {
 	margin: 0;
 	text-align: center;
 	/*font-family: 'Fontdiner Swanky', cursive;*/
+	/*font-family: 'Bungee Inline', cursive;*/
+}
+
+a {
+	text-decoration: none;
 }
 
 #header {
@@ -42,10 +47,15 @@ body {
 }
 
 #container {
-	background-color: rgb(79, 214, 234);
-	/*background-color: white;*/
+	/*background-color: rgba(79, 214, 234, 0.79);*/
+	/*rgba(5, 9, 8, 0.89);*/
+
+	/*background: linear-gradient(to right, rgba(79,214,234,.73) 0%, rgba(79,214,234,.5) 100%);*/
+	background: linear-gradient(to right, rgba(121,237,254,.82) 0%, rgba(79,210,229,.64) 100%);
+
 	max-width: 750px;
 	margin: 10px auto;
+	padding-bottom: 1px;
 	/*padding: 15px;*/
 	border-radius: 55px;
 	font-family: 'Bungee Inline', cursive;
@@ -65,14 +75,146 @@ body {
 	background: #ffa949 url('../img/retrobg3.jpg') no-repeat center;
   	background-size: cover;
   	border-radius: 70px;
-  	border: solid black 7px;
+  	border: solid #050908 7px;
   	font-size: 45px;
+  	margin-bottom: 50px;
 }
 
 .gameCard h1 {
 	margin-top: 195px;	
 }
 
-#footer {
-	margin: 20px;
+.gameLink {
+	display: block;
+	max-width: 510px;
+	margin: 0 auto;
+	color: black;
+	text-decoration: none;
 }
+
+#footer {
+	text-align: left;
+	/*margin: 20px;*/
+	padding: 50px;
+	background: linear-gradient(#050908, transparent);
+	background-color: rgb(79, 214, 234);
+	
+}
+
+
+/* ************************************************** */
+/*    Game page styles                                */
+/* ************************************************** */
+
+
+#pongHeader {
+  	padding-top: 35px;
+  	height: 300px;
+  	background:	linear-gradient(#050908, transparent 40%),
+			  	linear-gradient(0deg, #050908, transparent 60%),
+			  	linear-gradient(rgba(73, 220, 255, 0.87), transparent 90%),
+			  	linear-gradient(0deg, rgba(73, 220, 255, 0.87), transparent 90%),
+			   	rgba(73, 220, 255, 0.87) url('../img/beamsvector.jpg') no-repeat center;
+  	background-size: cover;
+  	text-align: center;
+}
+
+.gameTitle {
+	padding-top: 20px;
+	font-family: 'Fontdiner Swanky', cursive;
+	margin: 0;
+	font-size: 150px;
+}
+
+.siteTitle {
+	font-family: 'Fontdiner Swanky', cursive;
+	color: rgb(79, 214, 234);
+	font-size: 40px;
+	padding: 15px;
+	background-color: #050908;
+	
+}
+
+#gameMainContent {
+	background-color: #050908;
+	/*background-color: rgba(73, 220, 255, 0.87);*/
+	padding: 40px;
+}
+
+.homeLink {
+	/*color: rgba(73, 220, 255, 0.87);*/
+	color: rgba(16, 190, 232, 0.77);
+}
+
+#gameContainer {
+	background: linear-gradient(to right, rgba(121,237,254,.82) 0%, rgba(79,210,229,.64) 100%);
+	max-width: 1000px;
+	margin: 10px auto;
+	padding-bottom: 1px;
+	/*padding: 15px;*/
+	border-radius: 8px;
+	/*font-family: 'Bungee Inline', cursive;*/
+}
+
+canvas {
+	margin: 20px 0px;
+	border-radius: 4px;
+}
+
+#options {
+	max-width: 800px;
+	background-color: white;
+	margin: 20px auto;
+	padding: 20px;
+	border-radius: 4px;
+	/*border: 3px solid silver;*/
+}
+
+form {
+	margin-bottom: 20px;
+}
+
+form span {
+	margin-right: 7px;
+}
+
+#options h5 {
+	padding: 0px 0px;
+	margin-bottom: 5px;
+	border-bottom: .5px solid #ddd;
+}
+
+#instructions {
+	text-align: left;
+	width: 500px;
+	margin: 0 auto;
+	/*padding-bottom: 10px;*/
+}
+
+#instructions p {
+	margin: 0;
+
+}
+
+ul {
+	margin-bottom: 0;
+}
+
+
+
+
+/*.test {
+-webkit-box-shadow: inset 0px 0px 36px 10px #000000; 
+box-shadow: inset 0px 0px 60px 40px #050908;
+}*/
+
+
+
+
+
+
+
+
+
+
+/**/

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EViL Pong</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+
+	<link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Faster+One|Fontdiner+Swanky|Monoton|Vast+Shadow" rel="stylesheet">
+
+</head>
+
+<body>
+	<!-- //header -->
+	<div class="siteTitle">
+		<a class="homeLink" href="index.html">EViL ARCADE</a>
+	</div>
+	<div id="pongHeader">
+		<h1 class="gameTitle">PONG</h1>
+		<!-- <h1 class="pageTitle">ARCADE</h1> -->
+	</div>
+
+	<!-- main content -->
+	<div id="gameMainContent">
+		<div id="gameContainer">
+			<canvas id="gameCanvas" width="800" height="600"></canvas>
+
+			<div id="options">
+				<h5>Options</h5>
+				<!-- game options -->
+				<form>
+					<!-- Number of players Options -->
+					<div class="form-check form-check-inline">
+					  <span>Number of Players:  </span>
+					  <label class="form-check-label">
+					    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" checked> 1
+					  </label>
+					</div>
+					<div class="form-check form-check-inline">
+					  <label class="form-check-label">
+					    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2"> 2
+					  </label>
+					</div>
+					<br>
+					<!-- Number of balls -->
+					<div class="form-check form-check-inline">
+					  <span>Number of Balls:  </span>
+					  <label class="form-check-label">
+					    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio3" value="1" checked> 1
+					  </label>
+					</div>
+					<div class="form-check form-check-inline">
+					  <label class="form-check-label">
+					    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio4" value="2"> 2
+					  </label>
+					</div>
+					<br>
+				  	<button type="submit" class="btn btn-info">PLAY</button>
+				</form>				
+
+				<h5>Instructions</h5>
+				<div id="instructions">
+					
+					<p>Controls:</p>
+					<ul>
+						<li>Player 1: Mouse movement controls the left paddle</li>
+						<li>Player 2: Up and Down arrows control the right paddle</li>
+					</ul>
+					<p>Rules:</p>
+					<ul>
+						<li>First player to reach 3 points wins the round.</li>
+					</ul>					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="footer">
+		<span>Powered by EViL</span>
+	</div>
+
+	    <!-- Optional JavaScript -->
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+	<script src="js/pong.js"></script>
+</body>
+</html>
