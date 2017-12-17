@@ -29,47 +29,64 @@
 	<div id="gameMainContent">
 		<div id="gameContainer">
 			<canvas id="gameCanvas" width="800" height="600"></canvas>
+			<div class="container playerScores">
+			  <div class="row">
+<!-- 			    <div class="col-sm">
+			      Games won:
+			    </div> -->
+			    <div class="col-sm">
+			      <strong>Player 1:</strong> 
+			      <span id="p1RoundsWon">0</span>
+			    </div>
+			    <div class="col-sm">
+			      <strong>Player 2:</strong> 
+			      <span id="p2RoundsWon">0</span>
+			    </div>
+			  </div>
+			</div>
 
 			<div id="options">
 				<h5>Options</h5>
-				<!-- game options -->
+				<!-- FORM : game options -->
 				<form>
 					<!-- Number of players Options -->
 					<div class="form-check form-check-inline">
 					  <span>Number of Players:  </span>
 					  <label class="form-check-label">
-					    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" checked> 1
+					    <input class="form-check-input" type="radio" name="numberPlayers" id="numberPlayers1" value="1" checked> 1
 					  </label>
 					</div>
 					<div class="form-check form-check-inline">
 					  <label class="form-check-label">
-					    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2"> 2
+					    <input class="form-check-input" type="radio" name="numberPlayers" id="numberPlayers2" value="2"> 2
 					  </label>
 					</div>
 					<br>
-					<!-- Number of balls -->
-					<div class="form-check form-check-inline">
-					  <span>Number of Balls:  </span>
-					  <label class="form-check-label">
-					    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio3" value="1" checked> 1
-					  </label>
+
+					<!-- Select ball speed -->
+					<div class="form-row align-items-center">
+					    <div class="col-auto selectSpeed">
+					      	<label class="mr-sm-2" for="inlineFormCustomSelect">Ball Speed:</label>
+					      	<select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="selectBallSpeed">
+					        	<option value="5">Slow</option>
+					        	<option value="10" selected>Regular</option>
+					        	<option value="15">Fast</option>
+					      	</select>
+						</div>
 					</div>
-					<div class="form-check form-check-inline">
-					  <label class="form-check-label">
-					    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio4" value="2"> 2
-					  </label>
-					</div>
-					<br>
 				  	<button type="submit" class="btn btn-info">PLAY</button>
 				</form>				
-
+				<div id="resetBtn">
+					<button type="submit" class="btn btn-info">RESET</button>
+				</div>
+					
 				<h5>Instructions</h5>
 				<div id="instructions">
 					
 					<p>Controls:</p>
 					<ul>
 						<li>Player 1: Mouse movement controls the left paddle</li>
-						<li>Player 2: Up and Down arrows control the right paddle</li>
+						<li>Player 2: Move paddle up &amp down with 'I' &amp 'K' keys</li>
 					</ul>
 					<p>Rules:</p>
 					<ul>

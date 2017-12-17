@@ -21,6 +21,11 @@ a {
 	text-decoration: none;
 }
 
+.siteTitle a:hover {
+	text-decoration: none;
+	color: rgba(16, 190, 232, 0.51);
+}
+
 #header {
   	padding-top: 150px;
   	height: 720px;
@@ -72,12 +77,23 @@ a {
 	background-color: white;
 	max-width: 500px;
 	height: 500px;
-	background: #ffa949 url('../img/retrobg3.jpg') no-repeat center;
-  	background-size: cover;
+/*	background: #ffa949 url('../img/retrobg3.jpg') no-repeat center;
+  	background-size: cover;*/
   	border-radius: 70px;
   	border: solid #050908 7px;
   	font-size: 45px;
   	margin-bottom: 50px;
+}
+
+.gamePong {
+	background: #ffa949 url('../img/pong6.jpg') no-repeat center;
+  	background-size: cover;
+  	color: rgba(61, 180, 63, 0.99);
+}
+
+.gameNew {
+	background: #ffa949 url('../img/retrobg3.jpg') no-repeat center;
+  	background-size: cover;
 }
 
 .gameCard h1 {
@@ -157,16 +173,24 @@ a {
 }
 
 canvas {
-	margin: 20px 0px;
-	border-radius: 4px;
+	margin: 20px 0 0 0;
+	border-radius: 10px;
+}
+
+.playerScores {
+	max-width: 700px;
+}
+
+.selectSpeed {
+	margin: 0 auto 10px;
 }
 
 #options {
 	max-width: 800px;
 	background-color: white;
 	margin: 20px auto;
-	padding: 20px;
-	border-radius: 4px;
+	padding: 10px;
+	border-radius: 10px;
 	/*border: 3px solid silver;*/
 }
 
@@ -176,6 +200,10 @@ form {
 
 form span {
 	margin-right: 7px;
+}
+
+#resetBtn {
+	margin: 20px 0;
 }
 
 #options h5 {

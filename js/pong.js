@@ -1,18 +1,26 @@
 // **************************  GAME  *************************************
 
+var $p1RoundsWon = $('#p1RoundsWon');
+var $p2RoundsWon = $('#p2RoundsWon');
+
 var canvas;
 var canvasContext;
 var ballX = 70;
 var ballY = 100;
-var ballSpeedX = 10;
+// var ballSpeedX = 10;
+var ballSpeedX;
 var ballSpeedY = 4;
 
 var player1Score = 0;
 var player2Score = 0;
 const WINNING_SCORE = 3;
+var player1RoundsWon = 0;
+var player2RoundsWon = 0;
 
 var showingWinScreen = false;
 var firstGame = true;
+var onePlayer;
+var numberOfPlayers;
 
 var paddle1Y = 250;
 var paddle2Y = 250;
@@ -20,6 +28,12 @@ const PADDLE_HEIGHT = 100;
 const PADDLE_WIDTH = 10;
 const BALL_RADIUS = 10;
 
+const KEY_UP_ARROW = 73;    // i key
+const KEY_DOWN_ARROW = 75;  // k key
+var keyHeldUp = false;
+var keyHeldDown = false;
+
+// Player 1 mouse movement controls
 function calculateMousePos(evt) {
 	var rect = canvas.getBoundingClientRect();
 	var root = document.documentElement;
@@ -38,15 +52,28 @@ function handleMouseClick(evt) {
 		showingWinScreen = false;;
 	}
 };
-//  ************************************ temp mouseclick
-// function handleMouseClick(evt) {
-// 	if(showingWinScreen || firstGame) {
-// 		player1Score = 0;
-// 		player2Score = 0;
-// 		showingWinScreen = false;
-// 		firstGame = false;
-// 	}
-// };
+
+// Player 2 key controls
+function keyPressed(evt) {
+	// console.log(evt.keyCode);
+	if (evt.keyCode == KEY_UP_ARROW) {
+		keyHeldUp = true;
+	}
+	if (evt.keyCode == KEY_DOWN_ARROW) {
+		keyHeldDown = true;
+	}
+}
+
+// Player 2 key controls
+function keyReleased(evt) {
+	// console.log(evt.keyCode);
+	if (evt.keyCode == KEY_UP_ARROW) {
+		keyHeldUp = false;
+	}
+	if (evt.keyCode == KEY_DOWN_ARROW) {
+		keyHeldDown = false;
+	}
+}
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -60,21 +87,34 @@ window.onload = function() {
 
 	canvas.addEventListener('mousedown', handleMouseClick);
 
-	//Control left paddle with mouse
+	// event listener for player 2 paddle movement
+	document.addEventListener('keydown', keyPressed);
+	document.addEventListener('keyup', keyReleased);
+
+
+	// Control left paddle with mouse
 	canvas.addEventListener('mousemove',
 		function(evt) {
 			var mousePos = calculateMousePos(evt);
 			paddle1Y = mousePos.y-(PADDLE_HEIGHT/2);
-			console.log(paddle1Y);
+			// console.log(paddle1Y);
 			// paddle2Y = mousePos.y-(PADDLE_HEIGHT/2);
 		});
 };
 
 function ballReset(){
 	//check if a player has won
-	if(player1Score >= WINNING_SCORE || player2Score >= WINNING_SCORE) {
+	if(player1Score >= WINNING_SCORE)  {
+		player1RoundsWon += 1;
+		$p1RoundsWon.text(player1RoundsWon);
 		showingWinScreen = true;
 	}
+	if(player2Score >= WINNING_SCORE) {
+		player2RoundsWon += 1;
+		$p2RoundsWon.text(player2RoundsWon);
+		showingWinScreen = true;
+	}
+
 	ballX = canvas.width/2;
 	ballY = canvas.height/2;
 	ballSpeedX *= -1;
@@ -89,12 +129,30 @@ function computerMovement(){
 	}
 };
 
+function player2movement() {
+	if (keyHeldDown) {
+		paddle2Y += 12;
+	}
+	if (keyHeldUp) {
+		paddle2Y -= 12;
+	}
+}
+
+// Move Everything *****************************************************
 function moveEverything() {
+
 	if (showingWinScreen || firstGame) {
 		return;
 	}
 
-	computerMovement();
+	// One player or two player game?
+	if (numberOfPlayers == 1) {
+		computerMovement();		
+	} else if (numberOfPlayers == 2) {
+		player2movement();	
+	};
+
+
 
 	ballX += ballSpeedX;
 	ballY += ballSpeedY;
@@ -141,26 +199,27 @@ function drawNet() {
 	}
 }
 
+// Draw Everything *****************************************************
 function drawEverything() {
 	//Canvas, blanks out the screen with black
 	colorRect(0,0,canvas.width,canvas.height,'black');
 	// console.log(canvasContext.font)
 
-	if (showingWinScreen) {
-		canvasContext.fillStyle = 'white';
-		if(player1Score >= WINNING_SCORE) {
-			canvasContext.fillText('Left Player Won!', 325, 200);
-		} else if (player2Score >= WINNING_SCORE) {
-			canvasContext.fillText('Right Player Won!', 325, 200);
-		}
-		canvasContext.fillText('Click to Continue...', 325, 500);
-		return;
-	}
-
 	if (firstGame) {
 		canvasContext.fillStyle = 'white';
 		canvasContext.font = "50px sans-serif";
 		canvasContext.fillText('PONG', 330, 310);
+		return;
+	}
+
+	if (showingWinScreen) {
+		canvasContext.fillStyle = 'white';
+		if(player1Score >= WINNING_SCORE) {
+			canvasContext.fillText('Player 1 Won The Round!', 290, 200);
+		} else if (player2Score >= WINNING_SCORE) {
+			canvasContext.fillText('Player 2 Won The Round!', 290, 200);
+		}
+		canvasContext.fillText('Click To Play Again..', 313, 500);
 		return;
 	}
 
@@ -193,21 +252,58 @@ function colorRect(leftX, topY, width, height, drawColor){
 	canvasContext.fillRect(leftX, topY, width, height);
 }
 
-// ************************** END GAME  *************************************
+// ************************** END GAME CODE  *************************************
 
 
 
 // ************************** OPTION CONTROLS  *************************************
 
 $form = $('form');
+$resetButton = $('#resetBtn');
 
-console.log($form);
+$resetButton.hide();
 
+//Click the Reset button
+$resetButton.on('click', function(){
+	$form.show();
+	$resetButton.hide();
 
+	//Reset to initial state
+	firstGame = true;
+
+	//reset round total scores
+	player1RoundsWon = 0;
+	player2RoundsWon = 0;
+	$p1RoundsWon.text(player1RoundsWon);
+	$p2RoundsWon.text(player2RoundsWon);
+
+	//reset in game info
+	player1Score = 0;
+	player2Score = 0;
+	showingWinScreen = false;
+});
+
+//Form Submit to start game 
 $form.on('submit', function(evt) {
 	evt.preventDefault();
-	console.log('dude');
+
+	// Get number of players from Form input
+	// var numberOfPlayers = document.querySelector('input[name="numberPlayers"]:checked').value;
+	numberOfPlayers = $('input[name="numberPlayers"]:checked').val();
+
+	var speedX = $('#selectBallSpeed option:selected').val();
+	console.log(speedX);
+	if (speedX == 10) {
+		ballSpeedX = 10;
+	} else if (speedX == 5) {
+		ballSpeedX = 5;
+	} else if (speedX == 15) {
+		ballSpeedX = 15;
+	}
+
 	firstGame = false;
+	$form.hide();
+	$resetButton.show();
 });
 
 
