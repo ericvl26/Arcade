@@ -91,13 +91,23 @@ a {
   	color: rgba(61, 180, 63, 0.99);
 }
 
+.gameSnake {
+	background: #ffa949 url('../img/snake.png') no-repeat center;
+  	background-size: cover;
+  	color: rgb(18, 107, 194);
+}
+
+.gameCard h1 {
+	margin-top: 195px;	
+}
+
 .gameNew {
 	background: #ffa949 url('../img/retrobg3.jpg') no-repeat center;
   	background-size: cover;
 }
 
-.gameCard h1 {
-	margin-top: 195px;	
+.gameNew h1 {
+	margin-top: 140px;
 }
 
 .gameLink {
@@ -124,6 +134,18 @@ a {
 
 
 #pongHeader {
+  	padding-top: 35px;
+  	height: 300px;
+  	background:	linear-gradient(#050908, transparent 40%),
+			  	linear-gradient(0deg, #050908, transparent 60%),
+			  	linear-gradient(rgba(73, 220, 255, 0.87), transparent 90%),
+			  	linear-gradient(0deg, rgba(73, 220, 255, 0.87), transparent 90%),
+			   	rgba(73, 220, 255, 0.87) url('../img/retrobg3.jpg') no-repeat center;
+  	background-size: cover;
+  	text-align: center;
+}
+
+#snakeHeader {
   	padding-top: 35px;
   	height: 300px;
   	background:	linear-gradient(#050908, transparent 40%),
@@ -168,7 +190,7 @@ a {
 	margin: 10px auto;
 	padding-bottom: 1px;
 	/*padding: 15px;*/
-	border-radius: 8px;
+	border-radius: 25px;
 	/*font-family: 'Bungee Inline', cursive;*/
 }
 
@@ -182,7 +204,7 @@ canvas {
 }
 
 .selectSpeed {
-	margin: 0 auto 10px;
+	margin: 0 auto;
 }
 
 #options {
@@ -202,8 +224,12 @@ form span {
 	margin-right: 7px;
 }
 
-#resetBtn {
+/*#resetBtn {
 	margin: 20px 0;
+}*/
+
+#options button {
+	margin: 15px 0;
 }
 
 #options h5 {
