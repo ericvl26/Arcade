@@ -98,7 +98,7 @@ a {
 }
 
 .gameCard h1 {
-	margin-top: 195px;	
+	margin-top: 195px;
 }
 
 .gameNew {
@@ -124,7 +124,7 @@ a {
 	padding: 50px;
 	background: linear-gradient(#050908, transparent);
 	background-color: rgb(79, 214, 234);
-	
+
 }
 
 
@@ -157,6 +157,19 @@ a {
   	text-align: center;
 }
 
+#brickHeader {
+  	padding-top: 35px;
+  	height: 300px;
+  	background:	linear-gradient(#050908, transparent 40%),
+			  	linear-gradient(0deg, #050908, transparent 60%),
+			  	linear-gradient(rgba(73, 220, 255, 0.87), transparent 80%),
+			  	linear-gradient(0deg, rgba(73, 220, 255, 0.87), transparent 80%),
+			   	rgba(73, 220, 255, 0.87) url('../img/retrobg2.jpeg') no-repeat center;
+  	background-size: cover;
+  	text-align: center;
+}
+
+
 .gameTitle {
 	padding-top: 20px;
 	font-family: 'Fontdiner Swanky', cursive;
@@ -170,7 +183,7 @@ a {
 	font-size: 40px;
 	padding: 15px;
 	background-color: #050908;
-	
+
 }
 
 #gameMainContent {
@@ -258,7 +271,7 @@ ul {
 
 
 /*.test {
--webkit-box-shadow: inset 0px 0px 36px 10px #000000; 
+-webkit-box-shadow: inset 0px 0px 36px 10px #000000;
 box-shadow: inset 0px 0px 60px 40px #050908;
 }*/
 

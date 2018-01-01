@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>EViL Snake</title>
+	<title>EViL | Brick</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -9,7 +9,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="../css/style.css">
 
 	<link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Faster+One|Fontdiner+Swanky|Monoton|Vast+Shadow" rel="stylesheet">
 
@@ -18,10 +18,10 @@
 <body>
 	<!-- //header -->
 	<div class="siteTitle">
-		<a class="homeLink" href="index.html">EViL ARCADE</a>
+		<a class="homeLink" href="../index.html">EViL ARCADE</a>
 	</div>
-	<div id="snakeHeader">
-		<h1 class="gameTitle">SNAKE</h1>
+	<div id="brickHeader">
+		<h1 class="gameTitle">BRICK</h1>
 		<!-- <h1 class="pageTitle">ARCADE</h1> -->
 	</div>
 
@@ -29,11 +29,11 @@
 	<div id="gameMainContent">
 		<div id="gameContainer">
 			<!-- Canvas -->
-			<canvas id="gameCanvas" width="700" height="700"></canvas>
+			<canvas id="gameCanvas" width="800" height="600"></canvas>
 			<div class="container playerScores">
 			  <div class="row">
 			    <div class="col-sm">
-			      <strong>High Score:</strong> 
+			      <strong>High Score:</strong>
 			      <span id="highScore">0</span>
 			    </div>
 			  </div>
@@ -58,14 +58,14 @@
 					</div>
 					<!-- <br> -->
 
-				</form>				
+				</form>
 				<div id="resetBtn">
 					<button type="submit" class="btn btn-info">RESET</button>
 				</div>
-					
+
 				<h5>Instructions</h5>
 				<div id="instructions">
-					
+
 					<p>Controls:</p>
 					<ul>
 						<li>Left: H</li>
@@ -76,7 +76,7 @@
 <!-- 					<p>Rules:</p>
 					<ul>
 						<li>First player to reach 3 points wins the round.</li>
-					</ul>	 -->				
+					</ul>	 -->
 				</div>
 			</div>
 		</div>
@@ -96,6 +96,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
 
-	<script src="js/snake.js"></script>
+	<script src="../js/brick.js"></script>
 </body>
 </html>

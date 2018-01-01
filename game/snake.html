@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>EViL Pong</title>
+	<title>EViL | Snake</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -9,7 +9,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="../css/style.css">
 
 	<link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Faster+One|Fontdiner+Swanky|Monoton|Vast+Shadow" rel="stylesheet">
 
@@ -18,10 +18,10 @@
 <body>
 	<!-- //header -->
 	<div class="siteTitle">
-		<a class="homeLink" href="index.html">EViL ARCADE</a>
+		<a class="homeLink" href="../index.html">EViL ARCADE</a>
 	</div>
-	<div id="pongHeader">
-		<h1 class="gameTitle">PONG</h1>
+	<div id="snakeHeader">
+		<h1 class="gameTitle">SNAKE</h1>
 		<!-- <h1 class="pageTitle">ARCADE</h1> -->
 	</div>
 
@@ -29,19 +29,12 @@
 	<div id="gameMainContent">
 		<div id="gameContainer">
 			<!-- Canvas -->
-			<canvas id="gameCanvas" width="800" height="600"></canvas>
+			<canvas id="gameCanvas" width="700" height="700"></canvas>
 			<div class="container playerScores">
 			  <div class="row">
-<!-- 			    <div class="col-sm">
-			      Games won:
-			    </div> -->
 			    <div class="col-sm">
-			      <strong>Player 1:</strong> 
-			      <span id="p1RoundsWon">0</span>
-			    </div>
-			    <div class="col-sm">
-			      <strong>Player 2:</strong> 
-			      <span id="p2RoundsWon">0</span>
+			      <strong>High Score:</strong>
+			      <span id="highScore">0</span>
 			    </div>
 			  </div>
 			</div>
@@ -50,50 +43,40 @@
 				<h5>Options</h5>
 				<!-- FORM : game options -->
 				<form>
-					<button type="submit" class="btn btn-info">PLAY</button><br>
+				  	<button type="submit" class="btn btn-info">PLAY</button><br>
 					<!-- Number of players Options -->
 					<div class="form-check form-check-inline">
-					  <span>Number of Players:  </span>
+					  <span>Border Type:  </span>
 					  <label class="form-check-label">
-					    <input class="form-check-input" type="radio" name="numberPlayers" id="numberPlayers1" value="1" checked> 1
+					    <input class="form-check-input" type="radio" name="wallType" id="wallType1" value="wrap" checked> Wrap
 					  </label>
 					</div>
 					<div class="form-check form-check-inline">
 					  <label class="form-check-label">
-					    <input class="form-check-input" type="radio" name="numberPlayers" id="numberPlayers2" value="2"> 2
+					    <input class="form-check-input" type="radio" name="wallType" id="wallType2" value="wall"> Wall
 					  </label>
 					</div>
-					<br>
+					<!-- <br> -->
 
-					<!-- Select ball speed -->
-					<div class="form-row align-items-center">
-					    <div class="col-auto selectSpeed">
-					      	<label class="mr-sm-2" for="inlineFormCustomSelect">Ball Speed:</label>
-					      	<select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="selectBallSpeed">
-					        	<option value="5">Slow</option>
-					        	<option value="10" selected>Regular</option>
-					        	<option value="15">Fast</option>
-					      	</select>
-						</div>
-					</div>
-				  	
-				</form>				
+				</form>
 				<div id="resetBtn">
 					<button type="submit" class="btn btn-info">RESET</button>
 				</div>
-					
+
 				<h5>Instructions</h5>
 				<div id="instructions">
-					
+
 					<p>Controls:</p>
 					<ul>
-						<li>Player 1: Mouse movement controls the left paddle</li>
-						<li>Player 2: Move paddle up &amp down with 'I' &amp 'K' keys</li>
+						<li>Left: H</li>
+						<li>Up: U</li>
+						<li>Right: K</li>
+						<li>Down: J</li>
 					</ul>
-					<p>Rules:</p>
+<!-- 					<p>Rules:</p>
 					<ul>
 						<li>First player to reach 3 points wins the round.</li>
-					</ul>					
+					</ul>	 -->
 				</div>
 			</div>
 		</div>
@@ -113,6 +96,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
 
-	<script src="js/pong.js"></script>
+	<script src="../js/snake.js"></script>
 </body>
 </html>
