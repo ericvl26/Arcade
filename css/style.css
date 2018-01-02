@@ -162,8 +162,8 @@ a {
   	height: 300px;
   	background:	linear-gradient(#050908, transparent 40%),
 			  	linear-gradient(0deg, #050908, transparent 60%),
-			  	linear-gradient(rgba(73, 220, 255, 0.87), transparent 80%),
-			  	linear-gradient(0deg, rgba(73, 220, 255, 0.87), transparent 80%),
+			  	linear-gradient(rgba(73, 220, 255, 0.87), transparent 75%),
+			  	linear-gradient(0deg, rgba(73, 220, 255, 0.87), transparent 75%),
 			   	rgba(73, 220, 255, 0.87) url('../img/retrobg2.jpeg') no-repeat center;
   	background-size: cover;
   	text-align: center;
