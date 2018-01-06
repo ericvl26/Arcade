@@ -14,9 +14,22 @@ const BRICK_ROWS = 14;
 var brickGrid = new Array(BRICK_COLS * BRICK_ROWS);
 // console.log(brickGrid);
 var bricksLeft = 0;
+// var brickColorArr = [ null, '#fa694c', '#c4d559', '#44c676']
+
+var brickColorArr = [ null, '#ff3333', '#ffff33', '#00ccff']
+// var brickColorArr = [ null, '#ff3300', '#ffff1a', '#1a1aff']
+
+
+var firstGame = true;
+var showingWinScreen = false;
+var showingLoseScreen = false;
+
+var playerLives = 3;
+var playerScore = 0;
+var bestPlayerScore;
 
 const PADDLE_WIDTH = 100;
-const PADDLE_THICKNESS = 10;
+const PADDLE_THICKNESS = 17;
 const PADDLE_DIST_FROM_EDGE = 60;
 var paddleX = 400;
 
@@ -37,16 +50,27 @@ function updateMousePos(evt) {
 
    paddleX = mouseX - PADDLE_WIDTH/2;
 
-   // ** For Testing** test ball in any position
+   // ** For Testing** test ball in any position *****
    // ballX = mouseX;
    // ballY = mouseY;
-   // ballSpeedX = 5;
-   // ballSpeedY = -5;
+   // ballSpeedX = -8;
+   // ballSpeedY = -8;
 }
+
+function handleMouseClick(evt) {
+	if(showingWinScreen || showingLoseScreen) {
+		brickReset();
+      ballReset();
+		showingWinScreen = false;
+      showingLoseScreen = false;
+      playerScore = 0;
+	}
+};
 
 //set all values in brickGrid to true
 function brickReset() {
    bricksLeft = 0;
+   playerLives = 3;
    var i;
    for (i=0; i < 3*BRICK_COLS; i++) {  //creates gutter for first 3 rows
       // brickGrid[i] = false;
@@ -59,15 +83,17 @@ function brickReset() {
          brickGrid[i] = {
                         brickState: true,
                         brickLife: 3,
-                        brickColor: [ null, '#fa694c', '#c4d559', '#44c676']
+                        brickColor: brickColorArr[3]
+                        // brickColor: [ null, '#fa694c', '#c4d559', '#44c676']
                      };
          bricksLeft++;
       } else if (brickDisplayType = 'random') {  // *** Turn on random bricks
-         if(Math.random() < 0.55) {
+         if(Math.random() < 0.5) {
             brickGrid[i] = {
                            brickState: true,
                            brickLife: 3,
-                           brickColor: [ null, '#fa694c', '#c4d559', '#44c676']
+                           brickColor: brickColorArr[3]
+                           // brickColor: [ null, '#fa694c', '#c4d559', '#44c676']
                         };
             bricksLeft++;
          } else {
@@ -84,6 +110,7 @@ window.onload = function() {
    var framesPerSecond = 30;
    setInterval(updateAll, 1000/framesPerSecond);
 
+   canvas.addEventListener('mousedown', handleMouseClick);
    canvas.addEventListener('mousemove', updateMousePos);
 
    brickReset();
@@ -114,8 +141,15 @@ function ballMove() {
       ballSpeedY *=-1;
    }
    if(ballY > canvas.height) {  //bottom
-      ballReset();
-      brickReset();
+      if (playerLives > 0) {
+         playerLives--;
+         ballReset();
+      }
+      if (playerLives == 0) {
+         showingLoseScreen = true;
+      }
+      // ballReset();
+      // brickReset();
    }
 }
 
@@ -146,12 +180,14 @@ function ballBrickHandling() {
             //checks brick life
             if (brickGrid[brickIndexUnderBall]['brickLife'] > 0 && brickGrid[brickIndexUnderBall]['brickLife'] ) {
                brickGrid[brickIndexUnderBall]['brickLife'] -= 1;
-               // console.log(brickGrid[brickIndexUnderBall]['brickLife']);
+               brickGrid[brickIndexUnderBall]['brickColor'] = brickColorArr[brickGrid[brickIndexUnderBall]['brickLife']];
+               // console.log(brickGrid[brickIndexUnderBall]);
             }
             //if brickLife = 0
             if (brickGrid[brickIndexUnderBall]['brickLife'] == 0)  {
                brickGrid[brickIndexUnderBall]['brickState'] = false;
                bricksLeft--;
+               // console.log(brickGrid[brickIndexUnderBall]);
                // console.log(bricksLeft);
             } ;
 
@@ -184,6 +220,16 @@ function ballBrickHandling() {
                ballSpeedY *= -1;
             }
 
+            // win if all bricks gone
+            if (bricksLeft == 0) {
+               showingWinScreen = true;
+               //Update best/low score.
+               if (playerScore < bestPlayerScore || !bestPlayerScore) {
+                  bestPlayerScore = playerScore;
+                  $('#bestScore').text(bestPlayerScore);
+               }
+            } // out of bricks
+
          }  // end of brick found
    }  // end of valid col and row
 }  // end of ballBrickHandling function
@@ -206,15 +252,18 @@ function ballPaddleHandling() {
          //deflect ball depending on how far from center of paddle the ball hits.
          ballSpeedX = ballDistFromPaddleCenterX * 0.35;
 
-         // reset bricks if 0 bricks and ball hits paddle
-         if (bricksLeft == 0) {
-            brickReset();
-         } // out of bricks
+         //Counts how many times ball hits paddle.  Low Score wins!
+         playerScore++;
+
    } // ball center inside paddle
 } // end of ballPaddleHandling
 
 //************************** Move All *****************************
 function moveAll() {
+   if (showingWinScreen || showingLoseScreen || firstGame) {
+		return;
+	}
+
    ballMove();
    ballBrickHandling();
    ballPaddleHandling()
@@ -225,6 +274,28 @@ function drawAll() {
    //draw canvas
    colorRect(0,0, canvas.width,canvas.height, 'black');
 
+   if (firstGame) {
+      canvasContext.fillStyle = 'white';
+      canvasContext.font = "50px sans-serif";
+      canvasContext.fillText('BRICK', 330, 310);
+      return;
+   }
+
+   if (showingWinScreen) {
+      canvasContext.fillStyle = 'white';
+      canvasContext.fillText('You Win!', 360, 200);
+      canvasContext.fillText('Score: ' + playerScore, 359, 235);
+      canvasContext.fillText('Click To Play Again..', 320, 500);
+      return;
+   }
+
+   if (showingLoseScreen) {
+      canvasContext.fillStyle = 'white';
+      canvasContext.fillText('You Lose!', 360, 200);
+      canvasContext.fillText('Click To Play Again..', 320, 500);
+      return;
+   }
+
    //draw ball
    colorCircle(ballX,ballY, ballRadius, 'white');
 
@@ -232,6 +303,17 @@ function drawAll() {
    colorRect(paddleX, canvas.height - PADDLE_DIST_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, 'orange');
 
    drawBricks();
+
+   //Draw player lives
+   canvasContext.font = "18px sans-serif";
+   canvasContext.fillStyle = 'white';
+   canvasContext.fillText('Lives: ' + playerLives, 20, 580);
+   //Display Score
+   canvasContext.fillText('Score: ' + playerScore, 20, 20);
+   //Display Bricks remaining
+   canvasContext.fillText('Bricks Left: ' + bricksLeft, 650, 20);
+
+
 
 
 
@@ -261,7 +343,8 @@ function drawBricks() {
          var arrayIndex = rowColToArrayIndex(eachCol, eachRow);
 
          if(brickGrid[arrayIndex]['brickState'] == true) {
-            colorRect(BRICK_W*eachCol, BRICK_H*eachRow, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, brickGrid[arrayIndex]['brickColor'][(brickGrid[arrayIndex]['brickLife'])]);
+            colorRect(BRICK_W*eachCol, BRICK_H*eachRow, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, brickGrid[arrayIndex]['brickColor']);
+            // colorRect(BRICK_W*eachCol, BRICK_H*eachRow, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, brickGrid[arrayIndex]['brickColor'][(brickGrid[arrayIndex]['brickLife'])]);
          }  // end of is this brick here
       }  // end of for each brick
    } // end of for each row
@@ -298,23 +381,14 @@ $resetButton.on('click', function(){
 	$form.show();
 	$resetButton.hide();
 
+	$('#bestScore').text('0');
 
-	//Reset to initial state
-	// posX = 10;
-	// posY = 10;
-	// //Generate new random apple
-	// appleX=Math.floor(Math.random()*tileCount);
-	// appleY=Math.floor(Math.random()*tileCount);
-	// velX = 1;
-	// velY = 0;
-	// trail=[];
-	// tail = 5;
-	// playerScore = 0;
-	// highScore = 0;
-	$('#highScore').text(highScore);
-
-	endRound = false;
+   //Reset initial settings
 	firstGame = true;
+   showingWinScreen = false;
+   showingLoseScreen = false;
+   playerScore = 0;
+   bestPlayerScore = false;
 });
 
 //Form Submit to start game
@@ -322,9 +396,29 @@ $form.on('submit', function(evt) {
 	evt.preventDefault();
 
 	brickDisplayType = $('input[name="brickDisplayType"]:checked').val();
-	console.log(brickDisplayType);
+	// console.log(brickDisplayType);
+
+   var selectBrickSpeed = $('#selectBallSpeed option:selected').val();
+   // console.log(selectBrickSpeed);
+   if (selectBrickSpeed == 'slow') {
+      ballSpeedX = 4;
+      ballSpeedY = 5;
+      // console.log(ballSpeedX);
+      // console.log(ballSpeedY);
+   } else if (selectBrickSpeed == 'regular') {
+      ballSpeedX = 5;
+      ballSpeedY = 8;
+   } else if (selectBrickSpeed == 'fast') {
+      ballSpeedX = 6;
+      ballSpeedY = 11;
+   }
 
 	firstGame = false;
+   brickReset();
+   ballReset();
+   // ballSpeedX = 5;
+   // ballSpeedY = 7;
+
 	$form.hide();
 	$resetButton.show();
 });

@@ -49,7 +49,7 @@ function handleMouseClick(evt) {
 	if(showingWinScreen) {
 		player1Score = 0;
 		player2Score = 0;
-		showingWinScreen = false;;
+		showingWinScreen = false;
 	}
 };
 
@@ -147,9 +147,9 @@ function moveEverything() {
 
 	// One player or two player game?
 	if (numberOfPlayers == 1) {
-		computerMovement();		
+		computerMovement();
 	} else if (numberOfPlayers == 2) {
-		player2movement();	
+		player2movement();
 	};
 
 
@@ -178,7 +178,7 @@ function moveEverything() {
 			ballSpeedY = deltaY * 0.35;
 		} else {
 			player1Score++; //must be BEFORE ballReset()
-			ballReset();	
+			ballReset();
 		}
 	}
 
@@ -283,7 +283,7 @@ $resetButton.on('click', function(){
 	showingWinScreen = false;
 });
 
-//Form Submit to start game 
+//Form Submit to start game
 $form.on('submit', function(evt) {
 	evt.preventDefault();
 
@@ -305,30 +305,3 @@ $form.on('submit', function(evt) {
 	$form.hide();
 	$resetButton.show();
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -97,6 +97,12 @@ a {
   	color: rgb(18, 107, 194);
 }
 
+.gameBrick {
+	background: #ffa949 url('../img/brick3.png') no-repeat center;
+  	background-size: cover;
+  	color: rgb(239, 232, 67);
+}
+
 .gameCard h1 {
 	margin-top: 195px;
 }
